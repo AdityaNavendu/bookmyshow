@@ -1,7 +1,7 @@
 import React from 'react'
-import {navbarStyles} from "../assets/frontend/dummyStyles.js"
 import {useState} from 'react';
-import { Clapperboard,Home,Film,Calendar,Mail,Ticket,Icon } from 'lucide-react';
+import './Navbar.css'
+import { Clapperboard,Home,Film,Calendar,Mail,Ticket } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 const Navbar = () => {
 
@@ -17,38 +17,34 @@ const Navbar = () => {
     { id: "bookings", label: "Bookings", icon: Ticket, path: "/bookings" },
   ];
   return (
-    <nav className={
-      `${navbarStyles.nav.base}
-      ${isScrolled?navbarStyles.nav.scrolled:
-        navbarStyles.nav.notScrolled}`}>
-          <div className={navbarStyles.container}>
-            <div className={navbarStyles.logoContainer}>
-              <div className={navbarStyles.logoIconContainer}>
-                <Clapperboard className={navbarStyles.logoIcon}/>
+    <nav className={`site-nav ${isScrolled ? 'site-nav--scrolled' : ''}`}>
+          <div className="nav-container">
+            <div className="brand">
+              <div className="brand-icon">
+                <Clapperboard className="brand-icon__svg"/>
               </div>
-              <div className={navbarStyles.logoText}>cineverse</div>
+              <div className="brand-name">cineverse</div>
             </div>
-            <div className={navbarStyles.desktopNav}>
-              <div className={navbarStyles.desktopNavItem}>
-                {
-                  navItems.map((item)=>{
-                       const icon =item.icon;
-                       return (
-                        <div key={item.id} className={navbarStyles.desktopNavItem}>
-                          <NavLink to={item.path} end className={({isActive})=>
-                          `${navbarStyles.desktopNavLink.base} 
-                          ${isActive ?navbarStyles.desktopNavLink.active:navbarStyles.desktopNavLink.inactive                          }`
-                          }>
-                            <Icon className={navbarStyles.desktopNavIcon}></Icon>
-                            <span >{item.label}</span>
-                            <div className="pill-underline"></div>
-                          </NavLink>
-                          <span className="pill-border"></span>
-                        </div>
-                       )
-                  })
-                }
-              </div>
+            <div className="desktop-nav">
+              {navItems.map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <div key={item.id} className="nav-item">
+                    <NavLink
+                      to={item.path}
+                      end
+                      className={({ isActive }) =>
+                        `nav-link ${isActive ? 'nav-link--active' : 'nav-link--inactive'}`
+                      }
+                    >
+                      <ItemIcon className="nav-link__icon"/>
+                      <span>{item.label}</span>
+                      <span className="pill-underline"/>
+                    </NavLink>
+                    <span className="pill-border"/>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </nav>
