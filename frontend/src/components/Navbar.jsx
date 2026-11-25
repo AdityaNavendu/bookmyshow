@@ -1,7 +1,7 @@
 import React from 'react'
 import {navbarStyles} from "../assets/frontend/dummyStyles.js"
 import {useState} from 'react';
-import { Clapperboard,Home,Film,Calendar,Mail,Ticket } from 'lucide-react';
+import { Clapperboard,Home,Film,Calendar,Mail,Ticket,Icon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 const Navbar = () => {
 
@@ -38,7 +38,12 @@ const Navbar = () => {
                           <NavLink to={item.path} end className={({isActive})=>
                           `${navbarStyles.desktopNavLink.base} 
                           ${isActive ?navbarStyles.desktopNavLink.active:navbarStyles.desktopNavLink.inactive                          }`
-                          }></NavLink>
+                          }>
+                            <Icon className={navbarStyles.desktopNavIcon}></Icon>
+                            <span >{item.label}</span>
+                            <div className="pill-underline"></div>
+                          </NavLink>
+                          <span className="pill-border"></span>
                         </div>
                        )
                   })
