@@ -2,6 +2,7 @@ import React from 'react'
 import {navbarStyles} from "../assets/frontend/dummyStyles.js"
 import {useState} from 'react';
 import { Clapperboard,Home,Film,Calendar,Mail,Ticket } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 const Navbar = () => {
 
     const [isOpen,setisOpen] =useState(false);
@@ -28,7 +29,21 @@ const Navbar = () => {
               <div className={navbarStyles.logoText}>cineverse</div>
             </div>
             <div className={navbarStyles.desktopNav}>
-              <div className={navbarStyles.desktopNavItem}></div>
+              <div className={navbarStyles.desktopNavItem}>
+                {
+                  navItems.map((item)=>{
+                       const icon =item.icon;
+                       return (
+                        <div key={item.id} className={navbarStyles.desktopNavItem}>
+                          <NavLink to={item.path} end className={({isActive})=>
+                          `${navbarStyles.desktopNavLink.base} 
+                          ${isActive ?navbarStyles.desktopNavLink.active:navbarStyles.desktopNavLink.inactive                          }`
+                          }></NavLink>
+                        </div>
+                       )
+                  })
+                }
+              </div>
             </div>
           </div>
         </nav>
